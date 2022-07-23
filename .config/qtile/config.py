@@ -191,18 +191,6 @@ screens = [
 #            30,
 #            ),
         ),
-    Screen(
-        top=bar.Bar(
-            [
-                widget.CurrentLayout( 
-                    foreground="#000000",
-                    background="#9c0307"
-                    ),
-
-                point_left("#9c0307", "ab0421"),
-                ],25,),
-            )
- 
 ]
 
 # Drag floating layouts.
