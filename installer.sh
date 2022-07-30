@@ -6,15 +6,6 @@ read -r -p "A user sudo password need to be enter:" password
 
 cd ~/
 
-git clone https://github.com/vinceliuice/Matcha-gtk-theme.git
-git clone https://github.com/ryanoasis/nerd-fonts.git
-git clone https://github.com/nonpop/xkblayout-state.git
-
-sudo -S <<< $password Matcha-gtk-theme/install.sh
-make -C xkblayout-state/
-sudo -S <<< $password cp xkblayout-state/xkblayout-state /bin/
-sudo -S <<< $password nerd-fonts/install.sh
-
 Distro=$(cat /etc/*-release | grep "^ID=")
 Distro=$(echo "$Distro" | sed -r 's/[ID=]+//g')
 
@@ -44,8 +35,16 @@ for ((i = 0 ; i <= 1; i++)); do
         esac
 done
 
-mv KAT-Qtile/.* .
+git clone https://github.com/vinceliuice/Matcha-gtk-theme.git
+git clone https://github.com/ryanoasis/nerd-fonts.git
+git clone https://github.com/nonpop/xkblayout-state.git
 
-rm -rf Matcha-gtk-theme nerd-fonts xkblayout-state KAT-Qtile 
+sudo -S <<< $password Matcha-gtk-theme/install.sh
+make -C xkblayout-state/
+sudo -S <<< $password cp xkblayout-state/xkblayout-state /bin/
+sudo -S <<< $password nerd-fonts/install.sh
 
-sudo -S <<< $password reboot
+
+mv ~/KAT-Qtile/.* ~/
+
+rm -rf Matcha-gtk-theme nerd-fonts xkblayout-state KAT-Qtile && sudo -S <<< $password reboot
