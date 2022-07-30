@@ -12,19 +12,19 @@ Distro=$(echo "$Distro" | sed -r 's/[ID=]+//g')
 for ((i = 0 ; i <= 1; i++)); do
         case $Distro in
         	arch)
-                	xargs sudo -S <<< $password pacman -Sy --needed --noconfirm < KAT-Qtile/packageArch
+                	xargs sudo -S <<< $password pacman -Sy --needed --noconfirm < packageArch
 			break
 			;;
         	fedora)
-                	xargs sudo -S <<< $password dnf -y install < KAT-Qtile/packageFedora
+                	xargs sudo -S <<< $password dnf -y install < packageFedora
 			break
 			;;
         	debian)
-                	xargs sudo -S <<< $password apt-get -y install < KAT-Qtile/packageDeb
+                	xargs sudo -S <<< $password apt-get -y install < packageDeb
 			break
 			;;
 		ubuntu)
-			xargs sudo -S <<< $password apt-get -y install < KAT-Qtile/packageDeb
+			xargs sudo -S <<< $password apt-get -y install < packageDeb
 			break
 			;;
         	*)
@@ -45,6 +45,6 @@ sudo -S <<< $password cp xkblayout-state/xkblayout-state /bin/
 sudo -S <<< $password nerd-fonts/install.sh
 
 
-mv ~/KAT-Qtile/.* ~/
+mv .* ~/
 
-rm -rf Matcha-gtk-theme nerd-fonts xkblayout-state KAT-Qtile && sudo -S <<< $password reboot
+rm -rf KAT-Qtile && sudo -S <<< $password reboot
