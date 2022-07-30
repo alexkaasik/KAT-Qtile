@@ -22,9 +22,9 @@ for ((i = 0 ; i <= 1; i++)); do
         	debian)
                 xargs sudo -S <<< $password apt-get -y install < packageDeb
 				break
-				;;
-			ubuntu)
-                xargs sudo -S <<< $password apt-get -y install < packageDeb
+				;;s
+		ubuntu)
+		xargs sudo -S <<< $password apt-get -y install < packageDeb
 			    break
 			    ;;
         	*)
