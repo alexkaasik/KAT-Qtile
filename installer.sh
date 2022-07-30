@@ -12,26 +12,26 @@ Distro=$(echo "$Distro" | sed -r 's/[ID=]+//g')
 for ((i = 0 ; i <= 1; i++)); do
         case $Distro in
         	arch)
-                xargs sudo -S <<< $password pacman -Sy --needed --noconfirm < packageArch
-				break
-				;;
+                	xargs sudo -S <<< $password pacman -Sy --needed --noconfirm < KAT-Qtile/packageArch
+			break
+			;;
         	fedora)
-                xargs sudo -S <<< $password dnf -y install < packageFedora
-				break
-				;;
+                	xargs sudo -S <<< $password dnf -y install < KAT-Qtile/packageFedora
+			break
+			;;
         	debian)
-                xargs sudo -S <<< $password apt-get -y install < packageDeb
-				break
-				;;s
+                	xargs sudo -S <<< $password apt-get -y install < KAT-Qtile/packageDeb
+			break
+			;;
 		ubuntu)
-		xargs sudo -S <<< $password apt-get -y install < packageDeb
-			    break
-			    ;;
+			xargs sudo -S <<< $password apt-get -y install < KAT-Qtile/packageDeb
+			break
+			;;
         	*)
-			    echo "$Distro was based on"
-			    Distro=$(cat /etc/*-release | grep "^ID_LIKE=")
-			    Distro=$(echo "$Distro" | sed -r 's/[ID_LIKE=]+//g')
-			    ;;
+			echo "$Distro was based on"
+			Distro=$(cat /etc/*-release | grep "^ID_LIKE=")
+			Distro=$(echo "$Distro" | sed -r 's/[ID_LIKE=]+//g')
+			;;
         esac
 done
 
