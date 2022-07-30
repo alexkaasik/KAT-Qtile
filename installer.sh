@@ -43,8 +43,3 @@ sudo -S <<< $password Matcha-gtk-theme/install.sh
 make -C xkblayout-state/
 sudo -S <<< $password cp xkblayout-state/xkblayout-state /bin/
 sudo -S <<< $password nerd-fonts/install.sh
-
-
-mv .* ~/
-
-rm -rf KAT-Qtile && sudo -S <<< $password reboot
