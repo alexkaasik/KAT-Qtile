@@ -36,6 +36,7 @@ done
 git clone https://github.com/vinceliuice/Matcha-gtk-theme.git
 git clone https://github.com/ryanoasis/nerd-fonts.git
 git clone https://github.com/nonpop/xkblayout-state.git
+git clone https://github.com/alexkaasik/WallPaper.git
 
 sudo -S <<< $password Matcha-gtk-theme/install.sh
 make -C xkblayout-state/
