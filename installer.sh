@@ -42,7 +42,7 @@ make -C xkblayout-state/
 sudo -S <<< $password cp xkblayout-state/xkblayout-state /bin/
 sudo -S <<< $password nerd-fonts/install.sh
 
+rm -rf .git
+mv ~/KAT-Qtile/.[^.]* ~/
 
-mv ~/KAT-Qtile/.* ~/
-
-rm -rf Matcha-gtk-theme nerd-fonts xkblayout-state KAT-Qtile && sudo -S <<< $password reboot
+rm -rf xkblayout-state KAT-Qtile && sudo -S <<< $password reboot
