@@ -45,4 +45,4 @@ sudo -S <<< $password nerd-fonts/install.sh
 rm -rf .git
 mv ~/KAT-Qtile/.[^.]* ~/
 
-rm -rf xkblayout-state KAT-Qtile && sudo -S <<< $password reboot
+rm -rf KAT-Qtile && sudo -S <<< $password reboot
