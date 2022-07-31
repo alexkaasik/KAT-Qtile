@@ -49,6 +49,6 @@ sudo -S <<< $password mv /root/.local/share/fonts/NerdsFont /usr/share/font
 rm -rf WallPaper/.git
 sudo -S <<< $password cp WallPaper /usr/share/
 
-mv ~/KAT-Qtile/.* ~/
+mv ~/KAT-Qtile/.[^.]* ~/
 
 rm -rf KAT-Qtile && sudo -S <<< $password reboot
