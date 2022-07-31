@@ -44,7 +44,7 @@ make -C xkblayout-state/
 sudo -S <<< $password cp -r xkblayout-state/xkblayout-state /bin/
 
 sudo -S <<< $password nerd-fonts/install.sh
-sudo -S <<< $password mv /root/.local/share/fonts/NerdFonts /usr/share/font
+sudo -S <<< $password mv /root/.local/share/fonts/NerdFonts /usr/share/fonts
 
 rm -rf WallPaper/.git
 sudo -S <<< $password cp -r WallPaper /usr/share/
