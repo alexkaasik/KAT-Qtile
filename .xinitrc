@@ -7,5 +7,5 @@ setxkbmap -layout us,ee,ru -option grp:alt_shift_toggle &
 /usr/bin/pipewire-pulse &
 
 picom &
-feh --bg-fill /home/alex/images/WallPaper/KATI3.png &
+feh --bg-fill /usr/share/WallPaper/KATI3.png &
 exec qtile start
