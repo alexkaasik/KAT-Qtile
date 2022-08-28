@@ -31,20 +31,35 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 import os
 import re
-import subprocess
-   
+import subprocess   
 from keyconfig import *
+
+color1r="#9c0307"
+color2r="#ab0421"
+color3r="#bb063e"
+colorc="#a001c4"
+
+color1l="#0302c0"
+color2l="#3302c0"
+color3l="#4302c8"
+color4l="#5302c8"
+color5l="#7302c8"
+color6l="#8302c8"
+color7l="#8302c8"
 
 def get_lang():
     return subprocess.check_output(['/bin/xkblayout-state', 'print', '%s']).decode('utf-8').strip()
     
 def uptime_run():
     return subprocess.check_output(['/bin/uptime', '-p']).decode('utf-8').strip()
+
+def Update_Checker():
+    return subprocess.check_output(['/home/alex/Update_Checker/Check_Updates.sh']).decode('utf-8').strip()
    
 def point_left(color_fg, color_bg):
     return widget.TextBox(
             text="",
-            padding=-4,
+            padding=-4.6,
             fontsize="37",
             foreground=color_fg,
             background=color_bg)
@@ -52,10 +67,15 @@ def point_left(color_fg, color_bg):
 def point_right(color_fg, color_bg):
     return widget.TextBox(
             text="",
-            padding=-4,
+            padding=-4.6,
             fontsize="37",
             foreground=color_fg,
             background=color_bg)
+
+@hook.subscribe.startup_once
+def autostart():
+    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.Popen([home])
 
 def border():
     return {
@@ -84,7 +104,7 @@ layouts = [
 widget_defaults = dict(
     font="JetBrainsMono Nerd Font",
     fontsize=12,
-    padding=5,
+    padding=4,
     )
 extension_defaults = widget_defaults.copy()
 
@@ -94,103 +114,111 @@ screens = [
             [
                 widget.CurrentLayout( 
                     foreground="#000000",
-                    background="#9c0307"
+                    background=color1r
                     ),
 
-                point_left("#9c0307", "ab0421"),
+                point_left(color1r, color2r),
                 
-                widget.GroupBox(background="ab0421"),
+                widget.GroupBox(background=color2r),
                 
-                point_left("#ab0421", "#bb063e"),
+                point_left(color2r, color3r),
                 
-                widget.Prompt(background="#bb063e", foreground="#000000"),
+                widget.Prompt(background=color3r, foreground="#000000"),
                 
-                point_left("#bb063e", "#000000"),
+                point_left(color3r, "#000000"),
 
-#                widget.Chord(
-#                    chords_colors={
-#                        "launch": ("#ff0000", "#ffffff"),
-#                    },
-#                    name_transform=lambda name: name.upper(),
-#                ),
+                widget.Chord(
+                    chords_colors={
+                        "launch": ("#ff0000", "#ffffff"),
+                    },
+                    name_transform=lambda name: name.upper(),
+                ),
+
+                widget.TaskList(),
 
                 widget.Spacer(),
+
+                point_right(colorc, "#000000"),
 
                 widget.Clock(
                     format="%Y/%m/%d %a %H:%M %p",
-                    fontsize=15
+                        fontsize=15,
+                    background=colorc,
                     ),
+
+                point_left(colorc, "#000000"),
+                
 
                 widget.Spacer(),
 
-                point_right("#ff0000", "#000000"),
+                point_right(color6l, "#000000"),
+
+                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
+                #widget.StatusNotifier(),
+                widget.Systray(
+                        update_interval=1,
+                        background=color6l,
+                        ),
+
+                point_right(color5l, color6l),
 
                 widget.PulseVolume(
                         update_interval=0.1,
                         fontsize=15,
-                        background="#ff0000"
+                        background=color5l,
+                        mouse_callbacks={'Button1': lazy.spawn("pavucontrol")},
                         ),
 
-                point_right("#ffff00", "#ff0000"),
+                point_right(color4l, color5l),
                 
-                widget.TextBox(
-                        text = " ",
-                        mouse_callbacks={'Button1':lazy.spawn(browser)},
-                        fontsize=12, 
-                        foreground="#000000", 
-                        background="#ffff00",
-                        padding=4
-                        ),
-
-                point_right("#8902cb", "#ffff00"),
-
                 widget.GenPollText(
                         update_interval=0.1,
                         func=get_lang,
                         fmt='Keyboard: {}',
-                        background="#8902cb",
+                        background=color4l,
                         foreground="#000000",
                         fontsize=15
                         ),
 
-                point_right("#6502c6", "#8902cb"),
-          
-                point_right("#3302c0", "#6502c6"),
+                point_right(color3l, color4l),
+                
+                widget.GenPollText(
+                        update_interval=3600,
+                        func=Update_Checker,
+                        mouse_callbacks={'Button1': lazy.spawn(terminal + " -e /home/alex/Update_Checker/Updates.sh ")},
+                        background=color3l,
+                        foreground="#000000",
+                        fontsize=15
+                        ),
+         
+                point_right(color2l, color3l),
                 
                 widget.GenPollText(
                         update_interval=0.1,
                         func=uptime_run, 
-                        background="#3302c0",
+                        background=color2l,
                         foreground="#000000",
                         fontsize=15
                         ),
 
-                point_right("#230198", "#3302c0"),
+                point_right(color1l, color2l),
 
                 widget.Wttr(
                         location={
-                            'EETN':'Tallinn',
+                            'EETN':'',
                             },
                         update_interval=1,
-                        background="#230198",
-                        fontsize=14,
+                        background=color1l,
+                        fontsize=15,
+                        format='%c%t'
                         ),
 
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                # widget.Systray(),
-            ],
+                ],
             25,
             # border_width=[2, 2, 2, 2],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
-#        bottom=bar.Bar([
-#            widget.GroupBox(),
-#            widget.WindowName()
-#            ],
-#            30,
-#            ),
-        ),
+    ),
 ]
 
 # Drag floating layouts.
