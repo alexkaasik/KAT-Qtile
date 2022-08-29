@@ -45,7 +45,6 @@ color3l="#4302c8"
 color4l="#5302c8"
 color5l="#7302c8"
 color6l="#8302c8"
-color7l="#8302c8"
 
 def get_lang():
     return subprocess.check_output(['/bin/xkblayout-state', 'print', '%s']).decode('utf-8').strip()
@@ -54,7 +53,7 @@ def uptime_run():
     return subprocess.check_output(['/bin/uptime', '-p']).decode('utf-8').strip()
 
 def Update_Checker():
-    return subprocess.check_output(['/home/alex/Update_Checker/Check_Updates.sh']).decode('utf-8').strip()
+    return subprocess.check_output(['/usr/share/Update_Checker/Check_Updates.sh']).decode('utf-8').strip()
    
 def point_left(color_fg, color_bg):
     return widget.TextBox(
@@ -185,7 +184,7 @@ screens = [
                 widget.GenPollText(
                         update_interval=3600,
                         func=Update_Checker,
-                        mouse_callbacks={'Button1': lazy.spawn(terminal + " -e /home/alex/Update_Checker/Updates.sh ")},
+                        mouse_callbacks={'Button1': lazy.spawn(terminal + " -e /usr/share/Update_Checker/Updates.sh ")},
                         background=color3l,
                         foreground="#000000",
                         fontsize=15
